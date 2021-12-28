@@ -1,0 +1,15 @@
+abcc
+acbc
+accb
+bacc
+bcac
+bcca
+cbac
+cbca
+cabc
+cacb
+ccab
+ccba
+
+
+Executed In: 0.204 ms
