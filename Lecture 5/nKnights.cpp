@@ -53,38 +53,74 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-	string str="abcd";
-	int n=str.size();
-void subsequence(int si,string out){
-	// if(str.size()==0){
-	// 	cout<<out<<endl;
-	// 	return;
-	// }
-	if(si>str.size()-1){
-		cout<<out<<endl;
+void display(vector<vector<bool>> &board,int n){
+	for(auto &el:board){
+		for(int j=0;j<el.size();j++){
+			if(el[j]==true){
+				cout<<"K";
+			}else{
+				cout<<".";
+			}
+		}
+		cout<<endl;
+	}
+}
+
+bool isValid(int row,int col,int n){
+	return row>=0 && row<n && col>=0 && col<n;
+}
+bool possible(int row,int col,vector<vector<bool>> &board,int n){
+	if(isValid(row-2,col-1,n) && board[row-2][col-1]==true){
+		return false;
+	}
+	if(isValid(row-2,col+1,n) && board[row-2][col+1]==true){
+		return false;
+	}
+	if(isValid(row-1,col-2,n) && board[row-1][col-2]==true){
+		return false;
+	}
+	if(isValid(row-1,col+2,n) && board[row-1][col+2]==true){
+		return false;
+	}
+	return true;
+}
+
+int ways=0;
+void nKnight(int placed,int n,int sr,int sc,vector<vector<bool>> &board){
+	if(placed==n){
+		ways++;
+		display(board,n);
+		cout<<"\n.............\n"<<endl;
 		return;
 	}
-	// string ros=str.substr(1);
-	char ch=str[si];
-	subsequence(si+1,out);
-	subsequence(si+1,out+ch);
-}
-string v;
-void subsequence_op(int pos){
-	if(pos>=n){
-		cout<<v<<endl;
-		endl;
+
+	for(int row=sr;row<n;row++){
+		for(int col=(row==sr?sc:0);col<n;col++){
+			if(possible(row,col,board,n)){
+				board[row][col]=true;
+
+				nKnight(placed+1,n,row,col+1,board);
+
+				board[row][col]=false;
+			}
+		}
 	}
-	subsequence_op(pos+1);
-	v.push_back(str[pos]);
-	// v.pop_back();
-	subsequence_op(pos+1);
+
+
 }
+
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	subsequence(0,"");
+	int n;
+	cin>>n;
+	vector<vector<bool>> board(n,vector<bool>(n,false));
+	nKnight(0,n,0,0,board);
+	cout<<ways<<endl;
+
+
+
 
 
 

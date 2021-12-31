@@ -90,7 +90,7 @@ int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::string s = "abcc";
+    std::string s = "abcd";
     permutation_op(s, 0);
 
     #ifndef ONLINE_JUDGE 

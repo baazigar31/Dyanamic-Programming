@@ -1,15 +1,7 @@
-abcc
-acbc
-accb
-bacc
-bcac
-bcca
-cbac
-cbca
-cabc
-cacb
-ccab
-ccba
+aab
+abb
+bab
+bbb
 
 
-Executed In: 0.204 ms
+Executed In: 0.169 ms

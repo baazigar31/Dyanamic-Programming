@@ -53,38 +53,53 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-	string str="abcd";
-	int n=str.size();
-void subsequence(int si,string out){
-	// if(str.size()==0){
-	// 	cout<<out<<endl;
-	// 	return;
-	// }
-	if(si>str.size()-1){
-		cout<<out<<endl;
-		return;
-	}
-	// string ros=str.substr(1);
-	char ch=str[si];
-	subsequence(si+1,out);
-	subsequence(si+1,out+ch);
+
+int ways=0;
+bool isValid(int row,int col,int n){
+	return row>=0 && row<n && col>=0 && col<n;
 }
-string v;
-void subsequence_op(int pos){
-	if(pos>=n){
-		cout<<v<<endl;
-		endl;
+
+bool possible(int row,int col,vector<vector<bool>> &board,int n){
+	if(isValid(row-1,col-1,n) && board[row-1][col-1]==true){
+		return false;
 	}
-	subsequence_op(pos+1);
-	v.push_back(str[pos]);
-	// v.pop_back();
-	subsequence_op(pos+1);
+	if(isValid(row-1,col+1,n) && board[row-1][col+1]==true){
+		return false;
+	}
+	if(isValid(row-1,col,n) && board[row-1][col]==true){
+		return false;
+	}
+	return true;
 }
+void nKing(int placed,int sr,int sc,vector<vector<bool>> &board,int n){
+	if(placed==n){
+		ways++;
+		return ;
+	}
+	for(int row=sr;row<n;row++){
+		for(int col=(row==sr?sc:0);col<n;col++){
+			if(possible(row,col,board,n)){
+				board[row][col]=true;
+
+				nKing(placed+1,row,col+2,board,n);
+
+				board[row][col]=false;
+			}
+		}
+	}
+}
+
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	subsequence(0,"");
+	int n;
+	cin>>n;
+	vector<vector<bool>> board(n,vector<bool> (n,false));
+	nKing(0,0,0,board,n);
+	cout<<ways<<endl;
+
+
 
 
 

@@ -1,11 +1,19 @@
-0000
-0100
-1000
-0001
-1001
-0001
-0101
-1001
+
+d
+c
+cd
+b
+bd
+bc
+bcd
+a
+ad
+ac
+acd
+ab
+abd
+abc
+abcd
 
 
-Executed In: 0.227 ms
+Executed In: 0.243 ms
